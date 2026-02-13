@@ -1,0 +1,178 @@
+:root {
+  /* Theme color palette */
+  --primary: #421abc;
+  --bg: #000000;
+  --neutral-25: #fdfdfd;
+  --neutral-500: #717680;
+
+  /* Typography tokens */
+  --font-family-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Layout tokens */
+  --container-max-desktop: 1440px;
+  --container-padding-x-desktop: 140px;
+  --container-padding-x-tablet: 24px;
+  /* Dynamic mobile side padding: fluid up to a hard cap of 16px */
+  --container-padding-x-mobile: clamp(8px, 4vw, 16px);
+  --nav-height-desktop: 84px;
+  --nav-height-mobile: 60px;
+
+  /* Mobile-first clamp tokens for elements */
+  --mobile-element-min-width: 320px; /* lower bound */
+  --mobile-element-max-width: 394px; /* cap at 768px */
+  /* Gutter equals left+right paddings; derives from dynamic mobile padding */
+  --mobile-element-gutter: calc(var(--container-padding-x-mobile) * 2);
+  --mobile-element-max-height: 64px; /* cap height at 768px */
+}
+
+/* Utility: apply mobile-first clamp sizing */
+.mobile-frame {
+  width: 100%;
+  /* Include padding in the clamp: no subtraction from viewport width */
+  max-width: clamp(
+    var(--mobile-element-min-width, 320px),
+    100vw,
+    calc(var(--mobile-element-max-width, 394px) + var(--mobile-element-gutter))
+  );
+  max-height: var(--mobile-element-max-height, 64px);
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  :root {
+    /* Adjust container paddings for tablet */
+    --container-padding-x-desktop: var(--container-padding-x-tablet);
+  }
+  /* Common container widths */
+  .navbar-container,
+  .hero-container,
+  .who-we-are-container,
+  .what-we-do-container,
+  .our-work-container,
+  .meet-the-team-container,
+  .lets-collaborate-container,
+  .footer-container {
+    width: 100%;
+    padding-left: var(--container-padding-x-tablet);
+    padding-right: var(--container-padding-x-tablet);
+    box-sizing: border-box;
+  }
+  .hero-container {
+    height: auto;
+    flex-direction: column;
+  }
+  .image-tangan {
+    width: 100%;
+    height: auto;
+    margin: 24px 0 0;
+  }
+  .image-tangan img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    /* Compact paddings and navbar height for mobile */
+    --container-padding-x-desktop: var(--container-padding-x-mobile);
+  }
+  .navbar-container {
+    display: flex;
+    width: 100%;
+    /* Mobile-first: fluid width with clamp and capped height */
+    max-width: clamp(
+      var(--mobile-element-min-width, 320px),
+      100vw,
+      calc(
+        var(--mobile-element-max-width, 394px) + var(--mobile-element-gutter)
+      )
+    );
+    height: auto;
+    max-height: var(--mobile-element-max-height, 64px);
+    margin-inline: auto;
+    padding-left: var(--container-padding-x-mobile);
+    padding-right: var(--container-padding-x-mobile);
+    justify-content: center;
+    align-items: center;
+    background-color: #00000099; /* 60% black */
+    backdrop-filter: blur(40px);
+    box-sizing: border-box;
+  }
+  /* When you want the navbar (or any element) to use the clamp limits, add .mobile-frame */
+  .navbar-container.mobile-frame {
+    height: auto; /* allow content height, capped by max-height */
+  }
+  .logo {
+    width: 65px;
+    height: 36px;
+    margin-left: 0;
+    margin-right: 0;
+    object-fit: contain;
+  }
+  .burger-menu {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    margin-right: 0;
+    object-fit: contain;
+  }
+  .hero-container {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-text {
+    width: auto;
+    margin-left: var(--container-padding-x-mobile);
+    margin-right: var(--container-padding-x-mobile);
+  }
+  .lets-talk-button {
+    width: 100%;
+  }
+  .image-tangan {
+    width: 100%;
+    height: auto;
+    margin: 24px 0 0;
+    margin-left: 0;
+  }
+  .image-tangan img {
+    width: 100%;
+    height: auto;
+  }
+  .who-we-are-container,
+  .what-we-do-container,
+  .our-work-container,
+  .meet-the-team-container,
+  .lets-collaborate-container,
+  .footer-container {
+    width: 100%;
+    max-width: clamp(
+      var(--mobile-element-min-width, 320px),
+      100vw,
+      calc(
+        var(--mobile-element-max-width, 394px) + var(--mobile-element-gutter)
+      )
+    );
+    margin-inline: auto;
+    padding-left: var(--container-padding-x-mobile);
+    padding-right: var(--container-padding-x-mobile);
+  }
+  .what-we-do-grid,
+  .our-work-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .meet-the-team-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 24px;
+  }
+}
